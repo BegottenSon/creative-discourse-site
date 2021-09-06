@@ -13,23 +13,33 @@
         window.$_currentlyPlaying.pause(); 
     }
 </script>
+<section>
 
-<video
-src={clip}
-poster={overlay}
-bind:currentTime
-bind:paused
-bind:muted
-on:mousedown={handleMouseDown}
->
-<track kind="captions">
-</video>
+    <video
+    src={clip}
+    poster={overlay}
+    bind:currentTime
+    bind:paused
+    bind:muted
+    on:mousedown={handleMouseDown}
+    >
+    <track kind="captions">
+    </video>
+</section>
 
 <style>
+    section {
+        display: grid;
+        place-items: center;
+        border-radius: 12px;
+        width: 100%;
+        height: 110%;
+        background-image: radial-gradient(#0f0e0e, #1a1a1a);
+        box-shadow: inset 0 0 10px 1px rgb(12, 4, 9);
+    }
     video {
         border-radius: 12px;
-        box-shadow: rgba(70, 70, 2, 0.548) 2px 2px 25px;
         cursor: pointer;
-        width: 100%;
+        width: 95%;
     }
 </style>
