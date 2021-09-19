@@ -70,7 +70,7 @@
         +
       </button>
     </div>
-    <p class="sr-legal-text">Number of Reservations (max 10)</p>
+    <p class="sr-legal-text">Number of Reservations (max {maxRESERVATION})</p>
 
     <button class="button" id="buyButton" on:click={checkoutRedirect} disabled={disableSection}>
       Buy for $<span id="total">{total}</span>.00
