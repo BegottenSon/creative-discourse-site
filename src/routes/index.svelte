@@ -45,6 +45,7 @@
     .video {
         grid-column: 2/5;
         grid-row: 2;
+        margin-block-end: 3.5em;
     }
 
     #countdown {

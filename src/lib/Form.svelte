@@ -1,21 +1,19 @@
-<!-- <script context="module">
-    import { createRequire } from 'module';
-    // const require = createRequire(import.meta.url);
-    // const client = require('drip-nodejs')({ token: dripKey, accountId: 2600038 });
-</script> -->
 <script>
     import { dripKey } from "./Env";
     import { formComplete } from "./complete.js";
+    // import * as client from "drip-nodejs";
+    // let drip = client({ token: dripKey, accountId: 2600038 });
+    // console.log(drip)
     
     let firstName, lastName, email, skill = "";
 
     async function sendForm() {
-        const postAPI = "https://www.getdrip.com/forms/117453377/submissions";
+        const postAPI = `https://api.getdrip.com/${dripKey}`;
         let data = {
             "first_name": firstName,
             "last_name": lastName,
             "email": email,
-            "por_skill": skill
+            "pro_skill": skill
         }
         const response = await fetch(postAPI, {
             method: "POST",
@@ -25,17 +23,32 @@
         let content = await response.json();
         console.log(content);
     }
+    
+    // async function sendForm() {
+    //     var _dcq = _dcq || [];
+    //     _dcq.push(["identify", {
+    //         first_name: firstName,
+    //         last_name: lastName,
+    //         email: email,
+    //         pro_skill: skill,
+    //         success: function(response) {
+    //             console.log(response)
+    //         }
+    //     }]);
+
+    // }
+    
 
     function handleForm() {
         if(firstName && email) {
-            formComplete.set(true);
-            // sendForm()
+            $formComplete = true;
+            sendForm()
         }
         return false
     }
 </script>
 <section id="drip-section">
-    <form action="https://www.getdrip.com/forms/117453377/submissions" method="post" on:submit={handleForm} data-drip-embedded-form="117453377" id="drip-ef-117453377">
+    <form action="https://www.getdrip.com/forms/117453377/submissions" method="post" data-drip-embedded-form="117453377" id="drip-ef-117453377">
       <div data-drip-attribute="description"><strong>Sign Up Below to Let Us Know You're Coming!</strong><br>
       </div>
       
@@ -70,7 +83,7 @@
       </div>
 
       <div>
-        <input type="submit" value="Next Step" data-drip-attribute="sign-up-button" id="drip-button">
+        <input type="submit" value="Next Step" data-drip-attribute="sign-up-button" id="drip-button" on:click|preventDefault={handleForm}>
       </div>
     </form>  
   </section>
