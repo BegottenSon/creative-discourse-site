@@ -1,5 +1,4 @@
 <script>
-    import { page } from '$app/stores';
     import icon from './Icon.svg';
 </script>
 
