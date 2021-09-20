@@ -3,12 +3,11 @@
     import { formComplete } from "./complete.js";
     // import * as client from "drip-nodejs";
     // let drip = client({ token: dripKey, accountId: 2600038 });
-    // console.log(drip)
     
     let firstName, lastName, email, skill = "";
 
     async function sendForm() {
-        const postAPI = `https://api.getdrip.com/${dripKey}`;
+        const postAPI = `https://api.getdrip.com/v2/${dripKey}`;
         let data = {
             "first_name": firstName,
             "last_name": lastName,
@@ -25,19 +24,15 @@
     }
     
     // async function sendForm() {
-    //     var _dcq = _dcq || [];
-    //     _dcq.push(["identify", {
-    //         first_name: firstName,
-    //         last_name: lastName,
-    //         email: email,
-    //         pro_skill: skill,
-    //         success: function(response) {
-    //             console.log(response)
-    //         }
-    //     }]);
+    //     let data = {
+    //         "first_name": firstName,
+    //         "last_name": lastName,
+    //         "email": email,
+    //         "pro_skill": skill
+    //     }
+    //     drip.createUpdateSubscriber(data).then((response) => {console.log(response)})
 
     // }
-    
 
     function handleForm() {
         if(firstName && email) {

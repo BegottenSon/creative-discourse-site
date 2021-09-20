@@ -1,5 +1,5 @@
 <script>
-    let event = new Date('Sept 29, 2021 11:00:00').getTime();
+    let event = new Date('Sept 20, 2021 11:00:00').getTime();
     let now, distance = 0;
     let days, hours, minutes, seconds = 0
     let timer = setInterval(countDown, 1000)
