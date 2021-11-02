@@ -1,40 +1,46 @@
 <script>
     import { onMount } from "svelte";
     const keys = [
-        {pianoKey: 'cPiano', song:'../static/media/Allstar1.mp3', transform: 'matrix(0.970948,0,0,1,10.2117,0)'},
-        {pianoKey: 'dPiano', song:'../static/media/Reality.mp3', transform: 'matrix(0.970948,0,0,1,30.2117,0)'},
-        {pianoKey: 'ePiano', song:'../static/media/Vibe.mp3', transform: 'matrix(0.970948,0,0,1,50.2117,0)'},
-        {pianoKey: 'fPiano', song:'', transform: 'matrix(0.970948,0,0,1,70.2117,0)'},
+        {pianoKey: 'cPiano', song:'./media/Allstar1.mp3', transform: 'matrix(0.970948,0,0,1,10.2117,0)'},
+        {pianoKey: 'dPiano', song:'./media/Reality.mp3', transform: 'matrix(0.970948,0,0,1,30.2117,0)'},
+        {pianoKey: 'ePiano', song:'./media/Vibe.mp3', transform: 'matrix(0.970948,0,0,1,50.2117,0)'},
+        {pianoKey: 'fPiano', song:'./media/Asemble.mp3', transform: 'matrix(0.970948,0,0,1,70.2117,0)'},
         {pianoKey: 'gPiano', song:'', transform: 'matrix(0.970948,0,0,1,90.2117,0)'},
         {pianoKey: 'aPiano', song:'', transform: 'matrix(0.970948,0,0,1,110.212,0)'},
         {pianoKey: 'bPiano', song:'', transform: 'matrix(0.970948,0,0,1,130.212,0)'},    
     ]
 
     onMount(() => {
-        // keys.forEach(strobe)
         strobe()
     })
 
     let windowAudio;
+    let currentID;
 
     function strobe() {
         let pianoLoad = Array.from(document.getElementsByTagName("rect"));
+        // console.log(pianoLoad);
         let time = 100;
-        for(let k = 0; k < 7; k++) {
+        for(let k = 0; k < 12; k++) {
             let key = pianoLoad[k];
-            key.style.animationName = 'strobe';
+            console.log(pianoLoad[k]);
             key.style.animationDelay = `${time}ms`;
+            key.style.animationPlayState = 'running';
             time += 80
         }
     }
 
     function playSong(e) {        
         let keyID = e.target.id;
+        
         let targetKey = keys.find(key => key.pianoKey == keyID);
-        if(targetKey.song){
+        if(targetKey.song && keyID !== currentID){
             let song = new Audio(targetKey.song);
                 song.play();
                 windowAudio = song;
+                currentID = keyID
+        } else {
+            currentID = ''
         }
     }
 
@@ -88,8 +94,9 @@
 
     rect {
         fill: var(--white);
-        /* animation-name: strobe; */
-        animation-duration: 3.3s ;
+        animation-name: strobe;
+        animation-duration: 1s ;
+        animation-play-state: paused;
     }
 
     @keyframes hi {
